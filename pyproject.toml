@@ -13,7 +13,6 @@ keywords = ["dead-rising", "xenia", "save-converter"]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Environment :: Console",
-  "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
   "Topic :: Games/Entertainment",
