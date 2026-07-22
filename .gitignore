@@ -1,0 +1,33 @@
+# Local saves, extracted assets, binaries, and private research are never
+# publishable. Keep these exclusions anchored so package source remains visible.
+/samples/
+/references/
+/research/
+/work/
+/SESSION_HANDOFF.local.md
+/analyze_layout.py
+/dr2otr_converter.py
+/match_endian_blocks.py
+/wrap_xbox_for_pc.py
+
+*.DSF
+*.dsf
+*.DOF
+*.dof
+*.DPF
+*.dpf
+*.audit.json
+*.bin
+*.exe
+*.xex
+*.local.md
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+.venv/
+build/
+dist/
+*.egg-info/
