@@ -1,7 +1,8 @@
 # Dead Rising 2: Off the Record save converter
 
-Convert a **Story Mode** save from the Xbox 360 version of *Dead Rising 2: Off
-the Record* as exposed by Xenia into a native Steam PC save.
+Convert an extracted **Story Mode** `DCSAV01.DSF` payload from the Xbox 360
+version of *Dead Rising 2: Off the Record* into a native Steam PC save. The
+conversion has been live-tested with a payload created and exposed by Xenia.
 
 The converter is deliberately conservative: it validates both inputs, writes a
 new file, refuses to overwrite anything, and emits a JSON audit. It never finds
@@ -11,12 +12,14 @@ or installs a live save and never launches Steam, Xenia, or the game.
 
 | Direction | Story Mode | Sandbox Mode |
 | --- | --- | --- |
-| Xbox 360/Xenia to native PC | Supported | Not yet supported; omitted |
-| Native PC to Xbox 360/Xenia | Not yet supported | Not yet supported |
+| Extracted Xbox 360-format payload to native PC | Supported | Not yet supported; omitted |
+| Native PC to Xbox 360 format | Not yet supported | Not yet supported |
 
 This is specific to *Off the Record* (Xbox title ID `4343081F`, Steam app
-`45770`). It is not a universal Dead Rising or Xbox save converter, and it does
-not handle a retail console's signed container.
+`45770`). It is not a universal Dead Rising or Xbox save converter. It accepts
+the inner game payload, not a retail console's signed STFS package. Extract the
+inner `DCSAV01.DSF` first. A retail-console payload is expected to use the same
+Xbox format, but that source has not yet received an independent live test.
 
 The Story Mode adapter completed one real end-to-end test on July 22, 2026: a
 converted save loaded on PC, was overwritten by the PC game, closed cleanly,
@@ -27,7 +30,10 @@ backups.
 ## Requirements
 
 - Python 3.11 or newer; no third-party Python packages are required.
-- Your own Xenia save file.
+- Your own extracted Xbox 360-format `DCSAV01.DSF` payload. Xenia exposes this
+  file directly; a retail Xbox 360 save must first be extracted from its signed
+  STFS package. The [Xenia Canary FAQ](https://github.com/xenia-canary/xenia-canary/wiki/FAQ#how-do-i-use-xenia-vfs-dump)
+  documents `xenia-vfs-dump` as one STFS-content extraction option.
 - Your own **native-PC, Story-Mode-only** save to use as a platform template.
 - At least one carried item in the PC template. The converter learns small
   platform-local item fields from that record instead of hard-coding a pointer
@@ -59,7 +65,7 @@ Then write the conversion to a new path:
 
 ```sh
 dr2otr-save xbox-to-pc \
-  --xbox-save /path/to/xenia/DCSAV01.DSF \
+  --xbox-save /path/to/extracted-xbox/DCSAV01.DSF \
   --pc-template /path/to/native-pc/DCSAV01.DSF \
   --output /path/to/output/converted-DCSAV01.DSF
 ```
@@ -72,6 +78,9 @@ recording absolute input paths.
 Typical source locations are:
 
 - Xenia: `content/<profile>/4343081F/00000001/DCSAV01.DSF/DCSAV01.DSF`
+- Retail Xbox 360: extract the signed STFS package and supply its inner
+  `DCSAV01.DSF`. The converter does not modify, reassemble, or resign the STFS
+  package.
 - Proton/Steam:
   `userdata/<steam-id>/45770/remote/<gfwl-id>/DCSAV01.DSF`
 
@@ -82,7 +91,8 @@ to prove that the PC game can round-trip the converted state.
 
 ## Safety behavior
 
-- Validates the verified Xbox/Xenia and native-PC container layouts.
+- Validates the supported extracted Xbox-format payload and native-PC container
+  layouts.
 - Verifies section checksums and duplicate checksum fields.
 - Converts only serializer-derived numeric fields.
 - Preserves endian-neutral data and native-PC container/platform regions.

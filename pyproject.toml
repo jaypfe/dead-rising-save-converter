@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "dr2otr-save-converter"
 version = "0.1.0"
-description = "Convert Dead Rising 2: Off the Record Xenia Story Mode saves to native PC"
+description = "Convert extracted Dead Rising 2: Off the Record Xbox 360 Story saves to native PC"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"

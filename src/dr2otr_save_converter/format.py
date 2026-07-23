@@ -1,7 +1,7 @@
 """Low-level helpers for Dead Rising 2: Off the Record save containers.
 
 This module intentionally contains only the container offsets and checksum
-algorithm verified for the Xbox 360/Xenia and native-PC formats.
+algorithm verified for the extracted Xbox 360 and native-PC formats.
 It does not attempt to convert the mixed-endian logical payload.
 """
 

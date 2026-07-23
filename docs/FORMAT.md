@@ -1,9 +1,17 @@
 # Format and conversion boundary
 
-The Xbox 360/Xenia and native-PC files contain the same logical header, player,
-and Story Mode payloads in different containers. Xbox numeric serializer fields
-are big-endian; PC fields are little-endian. Raw flags, strings, padding, and
-opaque byte arrays are not globally byte-swapped.
+The converter's Xbox input is the inner game-owned `DCSAV01.DSF` payload. Xenia
+exposes this payload as a normal host file. A save copied from a retail Xbox 360
+is normally wrapped in a signed STFS package; version 0.1 does not extract,
+reassemble, or resign that outer package.
+
+The extracted Xbox-format and native-PC files contain the same logical header,
+player, and Story Mode payloads in different game-level containers. Xbox
+numeric serializer fields are big-endian; PC fields are little-endian. Raw
+flags, strings, padding, and opaque byte arrays are not globally byte-swapped.
+The source format has been live-tested through Xenia. An inner payload extracted
+from retail hardware is expected to have the same structure, but has not yet
+received an independent live test.
 
 The supported Story Mode schema covers:
 

@@ -2,7 +2,8 @@
 
 ## 0.1.0 - 2026-07-22
 
-- Add live-round-trip-tested Xbox 360/Xenia to native-PC Story Mode conversion.
+- Add extracted Xbox 360-format to native-PC Story Mode conversion, live-tested
+  with a Xenia-created payload.
 - Embed the complete serializer-derived Story numeric schema without extracted
   game data.
 - Preserve native-PC platform data and apply a fail-closed item-record policy.

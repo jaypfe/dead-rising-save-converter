@@ -14,16 +14,21 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="dr2otr-save",
         description=(
-            "Convert a Dead Rising 2: Off the Record Xbox 360/Xenia Story "
-            "Mode save into a new native-PC artifact."
+            "Convert an extracted Dead Rising 2: Off the Record Xbox 360 "
+            "Story Mode payload into a new native-PC artifact."
         ),
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
     convert = subparsers.add_parser(
         "xbox-to-pc",
-        help="convert Xbox 360/Xenia Story Mode state to native PC",
+        help="convert an extracted Xbox 360 Story Mode payload to native PC",
     )
-    convert.add_argument("--xbox-save", type=Path, required=True)
+    convert.add_argument(
+        "--xbox-save",
+        type=Path,
+        required=True,
+        help="inner Xbox-format DCSAV01.DSF payload, not a signed STFS package",
+    )
     convert.add_argument(
         "--pc-template",
         type=Path,

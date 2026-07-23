@@ -1,4 +1,4 @@
-"""Xbox 360/Xenia to native-PC Story Mode conversion for DR2 OTR.
+"""Extracted Xbox 360 payload to native-PC Story Mode conversion for DR2 OTR.
 
 This module only produces a new offline artifact. It never finds or replaces a
 live save, changes Steam configuration, or launches the game.
@@ -277,7 +277,7 @@ class WrittenConversion:
 
 
 def convert_xbox_to_pc(xbox_save: Path, pc_template: Path) -> ConversionResult:
-    """Convert one Xenia/Xbox 360 save into a native-PC Story Mode artifact."""
+    """Convert one extracted Xbox 360 payload to a native-PC Story artifact."""
 
     xbox_save = Path(xbox_save)
     pc_template = Path(pc_template)
